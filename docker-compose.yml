@@ -1,0 +1,19 @@
+# указываем версию compose
+version: "3.8"
+
+services:
+  myserver:
+    build: timeserver/
+    hostname: server
+      #command: python ./server.py
+    ports:
+        - 80:80
+  myclient:
+    build: timeclient/
+    hostname: client
+    #command: python ./client.py
+    # network_mode: host
+    volumes:
+      - /srv:/srv
+    depends_on:
+        - myserver
